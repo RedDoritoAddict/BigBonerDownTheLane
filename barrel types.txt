@@ -1,0 +1,5 @@
+1: normal
+2: R triangle
+3: L triangle
+4: oval
+5: literally nothing lmao

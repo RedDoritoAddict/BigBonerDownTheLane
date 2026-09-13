@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta Properties -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Arras.io is a fan-made sequel of diep.io! Survive and shoot at others while keeping your own tank alive!">
+  <meta name="robots" content="index, follow">
+  <title>TSTS</title>
+  <!-- CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">
+  <!-- Favicons -->
+  <meta name="theme-color" content="#8abc3f">
+</head>
+<body>
+  TSTS - Top Secret Token System
+  <div id="password-box">
+    <input id="password" placeholder="Token">
+    <br>
+    <button id="password-save">Save</button>
+    <button id="password-clear">Clear</button>
+    <button id="password-recall">Recall</button>
+  </div>
+  <br>
+  <script>
+  if (location.hash.indexOf('$') > 0)
+    localStorage.password = location.hash.slice(1)
+  var makeInput = function(id) {
+    var box = document.getElementById(id + '-box')
+    box.style.display = 'block'
+    var input = document.getElementById(id)
+    input.value = localStorage[id] || ''
+    document.getElementById(id + '-save').onclick = function() { localStorage[id] = input.value }
+    document.getElementById(id + '-clear').onclick = function() { localStorage[id] = input.value = '' }
+    document.getElementById(id + '-recall').onclick = function() { input.value = localStorage[id] }
+  }
+  makeInput('password')
+  </script>
+</body>
+</html>
