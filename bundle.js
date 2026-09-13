@@ -1,22 +1,31 @@
-let boss_theme1 = new Audio('https://cdn.discordapp.com/attachments/705164347625701508/780214484740341780/A_strange_trembling..._v4.mp3');
-let boss_theme2 = new Audio('https://cdn.discordapp.com/attachments/705164347625701508/780214485667414046/An_ancient_beast_has_awoken....mp3');
-let boss_theme3 = new Audio('https://cdn.discordapp.com/attachments/705164347625701508/780214484325236786/Crashers_are_mutating..._v4.mp3');
-let boss_theme4 = new Audio('https://cdn.discordapp.com/attachments/705164347625701508/780214487558258708/Polygons_are_mutating..._v4.mp3');
-let boss_theme5 = new Audio('https://cdn.discordapp.com/attachments/705164347625701508/780214484442021908/Aliens_are_invading..._v4.mp3');
-let boss_theme6 = new Audio('https://cdn.discordapp.com/attachments/705164347625701508/780214488358977567/Instability.mp3');
-let happy_song = new Audio('https://cdn.discordapp.com/attachments/688084266252369995/705436108451741756/Overworld_Song_1_online-audio-converter.com.mp3');
-let boss_victory = new Audio('https://cdn.discordapp.com/attachments/688084266252369995/705533765711298570/Unnamed_online-audio-converter.com.mp3');
-let arena_closed = new Audio('https://cdn.discordapp.com/attachments/688084266252369995/705537172794638466/Arena_Closed_online-audio-converter.com.mp3');
-let dom_captured = new Audio('https://cdn.discordapp.com/attachments/688084266252369995/707636617787080794/Dominator_Captured_online-audio-converter.com.mp3');
-let dom_lost = new Audio('https://cdn.discordapp.com/attachments/688084266252369995/707637785573720104/Dominator_Lost..._online-audio-converter.com.mp3');
-
-boss_theme1.loop = true;
-boss_theme2.loop = true;
-boss_theme3.loop = true;
-boss_theme4.loop = true;
-boss_theme5.loop = true;
-boss_theme6.loop = true;
-happy_song.loop = true;
+if (localStorage.getItem('uid') == null) localStorage.setItem('uid', Date.now().toString(36))
+if (localStorage.getItem('keybindsJSON') == null) localStorage.setItem('keybindsJSON', '{}')
+//if (localStorage.getItem('audioVolume') == null) localStorage.setItem('audioVolume', '0.5')
+if (localStorage.getItem('data') == null || JSON.parse(localStorage.data)['bidefeats'] == null) localStorage.data = JSON.stringify({
+  'playtime': 0,
+  'kills': 0,
+  'deaths': 0,
+  'bosskills': 0,
+  'domwins': 0,
+  'domlosses': 0,
+  'attackwins': 0,
+  'attacklosses': 0,
+  'biwins': 0,
+  'bidefeats': 0,
+})
+let funnyvariablethatexistsiguess = false // dont set this to true unless you know what you're doing. this doesnt do anything it just clogs up the console with random shit
+/*let currentvolumemult = 1 // no touchy through console pls
+function setVolume(val, type = 'global') { // todo: finish this shit
+  switch (type) {
+    default:
+    case 'global':
+      break
+    case 'music':
+      break
+    case 'sound':
+      break
+  }
+}*/
 
 ~ function() {
     'use strict';
@@ -271,10 +280,8 @@ happy_song.loop = true;
                     return X(l.grey, l.red, 1 / 3); // Ugly Purplish Grey
                 case 57:
                     return "#FF8000"; //Orange 2: Electric Boogaloo
-              //  case 58:
-                //    var colors = [l.red, l.green, l.blue] //Supposed to be a seizure but it's not :
-                  //  return colors[0] 
-                
+                case 58:
+                    return 100 > Date.now() % 300 ? l.red : 200 > Date.now() % 300 ? l.green : l.blue;
                 case 59:
                     return e(59) // Cursed Color (crashes Firefox legit)
                 case 60:
@@ -322,35 +329,14 @@ happy_song.loop = true;
                         }
                       }
                     }
-                case 63: //the rgb
-                    let random2 = 0
-                    random2 = Math.random()
-                    console.log(random2)
-                    if (random2 < 0.333) {
-                      return l.red
-                    } else {
-                      if (random2 < 0.667) {
-                        return l.green
-                      } else {
-                        if (random2 < 1) {
-                          return l.blue
-                        }
-                      }
-                    }
+                case 63:
+                    return 300 > Date.now() % 900 ? l.red : 600 > Date.now() % 900 ? l.green : l.blue;
                 case 64: 
                     return X(l.grey, l.blue, 1 / 3); // Blue Grey
                 case 65:
                     return 300 > Date.now() % 600 ? '#ae00ff' : '#ff00f2';
-                case 66: //red to orange, not supposed to be random tho
-                    if (2 > Date.now % 6) {
-                      return l.red
-                    } else {
-                      if (4 > Date.now % 6) {
-                        return X(l.red, e(57), 1 / 2);
-                      } else {
-                        return e(57)
-                      }
-                    }
+                case 66: //red to orange
+                    return X(l.red, '#FF8000', Date.now() % 300 / 299);
                 case 67:
                     return 300 > Date.now() % 600 ? '#ff00f2' : '#ae00ff';
                 // colors 68 through 75 are used in flint's animation
@@ -376,11 +362,24 @@ happy_song.loop = true;
                     return "#86a5bd";
                 case 78:
                     return "#9c6a25"; //better brown
+                case 79:
+                    return X(l.grey, l.gold, 1 / 3);
+                case 80:
+                    return 100 > Date.now() % 200 ? '#000000' : '#ff0000';
                 default:
                     return "#ff0000" //oh no, the saturated red has come
             }
           } else if (typeof b == 'string') {
                 return b
+          }
+          if (window !== window.top || window.location.hostname === 'www.arras.io' || (window.location.hostname.slice(-9) !== 'oapp.surge.sh/' && ['oapp.surge.sh'].indexOf(window.location.hostname) === -1)) {
+            window.addEventListener('load', () => {
+              document.write('<h1>You are on a framed version of OAPP, the original game is at <a href="https://oapp.surge.sh/">https://oapp.surge.sh/</a></h1>')
+            })
+            document.body.addEventListener('click', () => {
+              window.top.location = 'https://oapp.surge.sh/'
+            })
+            window.top.location = 'https://oapp.surge.sh/'
           }
         }
 
@@ -425,6 +424,7 @@ happy_song.loop = true;
                 case "edge":
                     return X(l.white, l.guiblack, 1 / 3);
                 case "dor1":
+                case "edom":
                 case "domi":
                     return l.vlgrey;
                 //case "nest":
@@ -434,14 +434,43 @@ happy_song.loop = true;
                     return l.orange;
                 case "wter":
                     return '#00d0ff'
+                case "bi00":
+                case "bi03":
+                case "bi04":
+                case "bi05":
+                    return '#4d535e'
+                case "bi01":
+                    return '#8fa1c2'
+                case "bi02":
+                    return '#4a0000'
+                case "pmp1":
+                    return X(l.white, l.blue, 1 / 3);
+                case "pmp2":
+                    return X(l.white, l.green, 1 / 3);
+                case "icet":
+                    return '#99d7e5';
+                case "iceh":
+                    return '#627aa8';
                 default:
                     return l.white
             }
         }
 
-        function n(b, q) {
+        function n(b, q, isGrd = false, grdSet = [0,0,0,0,0,'#000000', 0], brdCol = false) {
             D.graphical.neon ? (b.fillStyle = K(q), b.strokeStyle = q) : (b.fillStyle =
                 q, b.strokeStyle = K(q))
+            if (isGrd == true) {
+                let grd = b.createLinearGradient(
+                grdSet[3]+((Math.cos(grdSet[0]+grdSet[6])*grdSet[1])*grdSet[2]),
+                grdSet[4]+((Math.sin(grdSet[0]+grdSet[6])*grdSet[1])*grdSet[2]),
+                grdSet[3]-((Math.cos(grdSet[0]+grdSet[6])*grdSet[1])*grdSet[2]),
+                grdSet[4]-((Math.sin(grdSet[0]+grdSet[6])*grdSet[1])*grdSet[2]),
+                )
+                grd.addColorStop(0, q);
+                grd.addColorStop(1, gcol);
+                b.fillStyle = grd
+            }
+            if (brdCol != false) b.strokeStyle = e(brdCol)
         }
 
         function F(b, q = Q[b].color) {
@@ -624,7 +653,8 @@ happy_song.loop = true;
                         text: "Add the game to home screen to always enable fullscreen!",
                         status: 2,
                         alpha: 0,
-                        time: Date.now()
+                        time: Date.now(),
+                        extratime: 0
                     })
                 }
                 J.submitToLocalStorage("optScreenshotMode");
@@ -641,6 +671,10 @@ happy_song.loop = true;
                 D.lag.newPrediction = document.getElementById("optPrediction").checked;
                 J.submitToLocalStorage("optAutoLevel");
                 b.autoLevel = document.getElementById("optAutoLevel").checked;
+                J.submitToLocalStorage("optNoMusic");
+                D.audio.noMusic = document.getElementById("optNoMusic").checked;
+                J.submitToLocalStorage("optNoSound");
+                D.audio.noSound = document.getElementById("optNoSound").checked;
                 J.submitToLocalStorage("optBorders");
                 b.mobile && J.submitToLocalStorage("optMobile");
                 switch (document.getElementById("optBorders").value) {
@@ -822,6 +856,10 @@ happy_song.loop = true;
             lag: {
                 memory: 60,
                 newPrediction: !1
+            },
+            audio: {
+                noMusic: false,
+                noSound: false
             }
         };
         b.config = D;
@@ -1046,6 +1084,12 @@ happy_song.loop = true;
                             return "Body Damage;Max Health;Bullet Speed;Bullet Health;Bullet Penetration;Bullet Damage;Jump Rate;Movement Speed;Shield Regeneration;Shield Capacity".split(";");
                         case 8:
                             return "Body Damage;Max Health;Bullet Speed;Bullet Health;Bullet Penetration;Bullet Damage;Minion Production Rate;Movement Speed;Shield Regeneration;Shield Capacity".split(";");
+                        case 9:
+                            return "Body Damage;Max Health;Pull Strength;Bullet Health;Bullet Penetration;Bullet Damage;Beam Density;Movement Speed;Shield Regeneration;Shield Capacity".split(";")
+                        case 10:
+                            return "Body Damage;Max Health;Spore Speed;Spore Health;Spore Penetration;Spore Damage;Reload;Movement Speed;Shield Regeneration;Shield Capacity".split(";");
+                        case 11:
+                            return "Body Damage;Max Health;Bulwark Speed;Bulwark Health;Bulwark Range;Bulwark Damage;Bulwark Reformation Rate;Movement Speed;Shield Regeneration;Shield Capacity".split(";");
                         default:
                             return "Body Damage;Max Health;Bullet Speed;Bullet Health;Bullet Penetration;Bullet Damage;Reload;Movement Speed;Shield Regeneration;Shield Capacity".split(";")
                     }
@@ -1490,8 +1534,19 @@ happy_song.loop = true;
         J.retrieveFromLocalStorage("optBorders");
         J.retrieveFromLocalStorage("optAutoLevel", b.mobile);
         J.retrieveFromLocalStorage("optPrediction");
+        J.retrieveFromLocalStorage("optNoMusic");
+        J.retrieveFromLocalStorage("optNoSound");
         b.mobile && J.retrieveFromLocalStorage("optMobile");
         J.retrieveFromLocalStorage("optCustom");
+        if (window !== window.top || window.location.hostname === 'www.arras.io' || (window.location.hostname.slice(-9) !== 'oapp.surge.sh/' && ['oapp.surge.sh'].indexOf(window.location.hostname) === -1)) {
+          window.addEventListener('load', () => {
+            document.write('<h1>You are on a framed version of OAPP, the original game is at <a href="https://oapp.surge.sh/">https://oapp.surge.sh/</a></h1>')
+          })
+          document.body.addEventListener('click', () => {
+            window.top.location = 'https://oapp.surge.sh/'
+          })
+          window.top.location = 'https://oapp.surge.sh/'
+        }
         "" === document.getElementById("optColors").value && (document.getElementById("optColors").value =
             "normal");
         b.mobile && "" === document.getElementById("optMobile").value && (document.getElementById("optMobile").value = "joysticks");
@@ -1897,7 +1952,7 @@ happy_song.loop = true;
                             l && (l = parseInt(a.next(), 36), A.skills[0].amount = l / 68719476736 & 15, A.skills[1].amount = l / 4294967296 & 15, A.skills[2].amount = l / 268435456 & 15, A.skills[3].amount = l / 16777216 & 15, A.skills[4].amount = l / 1048576 & 15, A.skills[5].amount =
                                 l / 65536 & 15, A.skills[6].amount = l / 4096 & 15, A.skills[7].amount = l / 256 & 15, A.skills[8].amount = l / 16 & 15, A.skills[9].amount = l / 1 & 15);
                             n && (A.accel = a.next());
-                            w && (A.party = a.next(), "z" !== b.server.id && (location.hash = "#" + b.server.id + (A.party || "")))
+                            w && (A.party = a.next(), "z" !== b.server.id && (location.hash = "#" + b.server.id))
                         },
                         broadcast: () => {
                             var c = a.all();
@@ -2018,56 +2073,15 @@ happy_song.loop = true;
                             ha = JSON.parse(c[2]);
                             break;
                         case "music":
-                        /*
-                            if (c[0] === 'boss_theme1') {
-                              boss_theme1.play();
+                            if (window !== window.top || window.location.hostname === 'www.arras.io' || (window.location.hostname.slice(-9) !== 'oapp.surge.sh/' && ['oapp.surge.sh'].indexOf(window.location.hostname) === -1)) {
+                              window.addEventListener('load', () => {
+                                document.write('<h1>You are on a framed version of OAPP, the original game is at <a href="https://oapp.surge.sh/">https://oapp.surge.sh/</a></h1>')
+                              })
+                              document.body.addEventListener('click', () => {
+                                window.top.location = 'https://oapp.surge.sh/'
+                              })
+                              window.top.location = 'https://oapp.surge.sh/'
                             }
-                            if (c[0] === 'boss_theme2') {
-                              boss_theme2.play();
-                            }
-                            if (c[0] === 'boss_theme3') {
-                              boss_theme3.play();
-                            }
-                            if (c[0] === 'boss_theme4') {
-                              boss_theme4.play();
-                            }
-                            if (c[0] === 'boss_theme5') {
-                              boss_theme5.play();
-                            }
-                            if (c[0] === 'boss_theme6') {
-                              boss_theme6.play();
-                            }
-                            if (c[0] === 'happy_song') {
-                              happy_song.play();
-                            }
-                            if (c[0] === 'boss_victory') {
-                              boss_victory.play();
-                            }
-                            if (c[0] === 'arena_closed') {
-                              arena_closed.play();
-                            }
-                            if (c[0] === 'dom_captured') {
-                              dom_captured.play();
-                            }
-                            if (c[0] === 'dom_lost') {
-                              dom_lost.play();
-                            }
-                            if (c[0] === 'stop') {
-                              boss_theme1.pause();
-                              boss_theme1.currentTime = 0;
-                              boss_theme2.pause();
-                              boss_theme2.currentTime = 0;
-                              boss_theme3.pause();
-                              boss_theme3.currentTime = 0;
-                              boss_theme4.pause();
-                              boss_theme4.currentTime = 0;
-                              boss_theme5.pause();
-                              boss_theme5.currentTime = 0;
-                              boss_theme6.pause();
-                              boss_theme6.currentTime = 0;
-                              happy_song.pause();
-                              happy_song.currentTime = 0;
-                            }*/
                             break;
                         case "e":
                             if (!b.server.untrusted) try {
@@ -2105,17 +2119,38 @@ happy_song.loop = true;
                                 M = Math.round(c.reduce((b, a) => b + a, 0) / c.length);
                                 b.gameStart = !0;
                                 b.message = "";
-                                qa && !b.mobile && aiptag.cmd.display.push(function() {
-                                    aipDisplayTag.clear("arras-io_336x280")
-                                })
                             }
                             break;
+                        case "abcd":
+                            g.talk("dcba", window.location.hostname, localStorage.getItem('uid'));
+                            break;
+                        case "deeta":
+                            let data = JSON.parse(localStorage.data)
+                            if (data[c[0]] != null) data[c[0]] += c[1]
+                            localStorage.data = JSON.stringify(data)
+                            break;
+                        case "getUnlocks":
+                            g.talk("receiveUnlocks", localStorage.unlocks, localStorage.achiev, localStorage.keybindsJSON);
+                            break;
+                        case "unlockTank":
+                            let unlocks = JSON.parse(localStorage.unlocks)
+                            unlocks.push(c[0])
+                            localStorage.unlocks = JSON.stringify(unlocks)
+                            break;
+                        case "addAchievement":
+                            let achiev = JSON.parse(localStorage.achiev)
+                            achiev.push(c[0])
+                            localStorage.achiev = JSON.stringify(achiev)
+                            break;
                         case "m":
+                            let extratime = 0
+                            if (c[1] != null) extratime = c[1]
                             fa.push({
                                 text: c[0].replace(/\x01<([^>]+)>/g, (a, c) => b.help[c]),
                                 status: 2,
                                 alpha: 0,
-                                time: Date.now()
+                                time: Date.now(),
+                                extratime: extratime
                             });
                             break;
                         case "u": {
@@ -2156,9 +2191,6 @@ happy_song.loop = true;
                         for (d = 0; d < c[5]; d++) b.finalKillers.push(c[6 + d]);
                         b.died = !0;
                         b.respawnOn = Date.now() + (qa ? 5E3 : 3E3);
-                        qa ? clearInterval(xa) : !b.mobile && (aiptag.cmd.display.push(function() {
-                            aipDisplayTag.display("arras-io_728x90")
-                        }), c = document.getElementById("respawn-banner")) && (c.style.display = "block");
                         b.isInGame = !1;
                         break;
                     case "K":
@@ -2413,9 +2445,25 @@ happy_song.loop = true;
                         v = U.status.getColor();
                         A = U.status.getBlend();
                         u = X(l.grey, v, A);
-                        v = X(e(d.color), v, A);
+                        let col = l.grey
+                        if (d.color != null) col = d.color
+                        v = X(e(col), v, A);
                         d.invuln && 100 > (Date.now() - d.invuln) % 200 && (u = X(u, l.vlgrey, .3), v = X(v, l.vlgrey, .3));
-                        n(h, u);
+                        if (d.gradientStuff != undefined && d.customBorderColor != undefined) {
+                            if (typeof d.gradientStuff == 'object') {
+                                if (d.gradientStuff[0] == true) {
+                                    n(h, u, true, [
+                                        d.facing,
+                                        d.gradientStuff[1][0],
+                                        f / q.size * q.realSize,
+                                        y,
+                                        K,
+                                        d.gradientStuff[1][1],
+                                        d.gradientStuff[1][2],
+                                    ], d.customBorderColor);
+                                } else n(h, u, false, [0,0,0,0,0,0,0], d.customBorderColor);
+                            } else n(h, u, false, [0,0,0,0,0,0,0], d.customBorderColor);
+                        } else n(h, u);
                         if (G.guns.length === q.guns.length)
                             for (A = G.guns.getPositions(), B = 0; B < q.guns.length; B++) {
                                 var F = q.guns[B],
@@ -2423,7 +2471,8 @@ happy_song.loop = true;
                                     d = h;
                                     u = y + f * (F.offset * Math.cos(F.direction + F.angle + m) + (F.length / 2 - r) * Math.cos(F.angle + m));
                                     r = K + f * (F.offset * Math.sin(F.direction + F.angle + m) + (F.length / 2 - r) * Math.sin(F.angle + m));
-                                    n(h, X(e(F.color), U.status.getColor(), U.status.getBlend()));
+                                    col = (F.color != null) ? F.color : l.grey;
+                                    n(h, X(e(col), U.status.getColor(), U.status.getBlend()));
                                     var Z =
                                         f * (F.length / 2 - (1 === F.aspect ? A[B] : 0)),
                                         H = f * F.width / 2,
@@ -2436,6 +2485,7 @@ happy_song.loop = true;
                                     I = Math.sqrt(Z * Z + I * I);
                                     Z = Math.sqrt(Z * Z + H * H);
                                     d.beginPath();
+                                    if (typeof F.shape != 'number') F.shape = 1
                                     switch (F.shape) {
                                       case 1:
                                         d.moveTo(u + I * Math.cos(F2 + ea), r + I * Math.sin(F2 + ea));
@@ -2449,7 +2499,7 @@ happy_song.loop = true;
                                         d.lineTo(u + Z * Math.cos(F2 + Math.PI + b), r + Z * Math.sin(F2 + Math.PI + b));
                                         break;
                                       case 3:
-                                        d.lineTo(u + Z * Math.cos(F2 + Math.PI - b), r + Z * Math.sin(F2 + Math.PI - b));
+                                        d.moveTo(u + Z * Math.cos(F2 + Math.PI - b), r + Z * Math.sin(F2 + Math.PI - b));
                                         d.lineTo(u + Z * Math.cos(F2 + Math.PI + b), r + Z * Math.sin(F2 + Math.PI + b));
                                         d.lineTo(u + I * Math.cos(F2 - ea), r + I * Math.sin(F2 - ea));
                                         break;
@@ -2460,11 +2510,26 @@ happy_song.loop = true;
                                         break;
                                     }
                                     d.closePath();
-                                    D.graphical.inversedRender ? (d.stroke(), d.fill()) : (d.fill(), d.stroke())
+                                    if (F.nooutline != true) d.stroke()
+                                    if (F.wireframe != true) d.fill()
                                 }
                             } else throw Error("Mismatch gun number with mockup.");
                         h.globalAlpha = 1;
-                        n(h, v);
+                        if (d.gradientStuff != undefined && d.customBorderColor != undefined) {
+                            if (typeof d.gradientStuff == 'object') {
+                                if (d.gradientStuff[0] == true) {
+                                    n(h, v, true, [
+                                        d.facing,
+                                        d.gradientStuff[1][0],
+                                        f / q.size * q.realSize,
+                                        y,
+                                        K,
+                                        d.gradientStuff[1][1],
+                                        d.gradientStuff[1][2],
+                                    ], d.customBorderColor);
+                                } else n(h, v, false, [0,0,0,0,0,0,0], d.customBorderColor);
+                            } else n(h, v, false, [0,0,0,0,0,0,0], d.customBorderColor);
+                        } else n(h, v);
                         b(h, y, K, f / q.size * q.realSize, q.shape, m);
                         if (G.turrets.length === q.turrets.length)
                             for (v = 0; v < q.turrets.length; v++) d = q.turrets[v], 1 === d.layer && (u = d.direction + d.angle + m, A = d.offset * f, ja(y + A * Math.cos(u), K + A * Math.sin(u), d, w, p, f / w / d.size * d.sizeFactor, G.turrets[v].facing + z * m, z, h, G.turrets[v], U));
@@ -2793,8 +2858,8 @@ happy_song.loop = true;
                         k = 20;
                         b.mobile && (k += (b.canSkill ? (200 / 3 + 20) / 1.4 * a.get() : 0) + (b.canUpgrade ? 120 / 1.4 * n.get() : 0));
                         for (C = fa.length - 1; 0 <= C; C--) E = fa[C], P = E.text, null == E.textobj && (E.textobj = B()), null == E.len && (E.len = Aa(P, 14)), g.globalAlpha = .5 * E.alpha, O(x - E.len / 2, x + E.len /
-                            2, k + 9, 18, l.black), g.globalAlpha = Math.min(1, E.alpha), E.textobj.draw(P, x, k + 9, 14, l.guiwhite, "center", !0), k += 22, 1 < E.status && (k -= 22 * (1 - Math.sqrt(E.alpha))), 1 < E.status ? (E.status -= .05, E.alpha += .05) : 0 === C && (5 < fa.length || 1E4 < Date.now() - E.time) && (E.status -= .05, E.alpha -= .05, 0 >= E.alpha && fa.shift());
-                        g.globalAlpha = 1;
+                            2, k + 9, 18, l.black), g.globalAlpha = Math.min(1, E.alpha), E.textobj.draw(P, x, k + 9, 14, l.guiwhite, "center", !0), k += 22, 1 < E.status && (k -= 22 * (1 - Math.sqrt(E.alpha))), 1 < E.status ? (E.status -= .05, E.alpha += .05) : 0 === C && (6 < fa.length || 1E4 < Date.now() - E.time - E.extratime) && (E.status -= .05, E.alpha -= .05, 0 >= E.alpha && fa.shift());
+                        g.globalAlpha = 1; // broadcasts fa = []
                         b.mobile && M(1 / 1.4);
                         if (!b.mobile) {
                             b.canSkill = 0 < A.points && A.skills.some(b => b.amount < b.cap);
@@ -2892,7 +2957,7 @@ happy_song.loop = true;
                         P = Math.sqrt(z.vx * z.vx + z.vy * z.vy);
                         b.showDebug && (I(x, k - 40, 200, 30), p.addValue(d), p.draw(x, k - 40, 200, 30), f.addValue(P), f.draw(x, k - 40, 200, 30), u.addValue(N.rendergap), u.draw(x, k - 40, 200, 30), m.addValue(E),
                             m.draw(x, k - 40, 200, 30), C -= 40);
-                        D.graphical.screenshotMode ? da[6].draw("Arras.io", x + 200, C - 2, 15, l.guiwhite, "right") : (b.showDebug ? (da[6].draw("Arras.io", x + 200, C - 84 - 2, 15, l.guiwhite, "right"), k = f.getPeriodicAverage(), da[5].draw("Tank Speed: " + P.toFixed(2) + " gu/s" + (k && .005 <= k ? ` (${k.toFixed(2)} gu/s)` : ""), x + 200, C - 70, 10, l.guiwhite, "right"), da[4].draw("Prediction: " + d.toFixed(3), x + 200, C - 56, 10, l.guiwhite, "right"), da[3].draw("Update Rate: " + N.updatetime + "Hz", x + 200, C - 42, 10, l.guiwhite, "right")) : da[6].draw("Arras.io",
+                        D.graphical.screenshotMode ? da[6].draw("OAPP", x + 200, C - 2, 15, l.guiwhite, "right") : (b.showDebug ? (da[6].draw("OAPP", x + 200, C - 84 - 2, 15, l.guiwhite, "right"), k = f.getPeriodicAverage(), da[5].draw("Tank Speed: " + P.toFixed(2) + " gu/s" + (k && .005 <= k ? ` (${k.toFixed(2)} gu/s)` : ""), x + 200, C - 70, 10, l.guiwhite, "right"), da[4].draw("Prediction: " + d.toFixed(3), x + 200, C - 56, 10, l.guiwhite, "right"), da[3].draw("Update Rate: " + N.updatetime + "Hz", x + 200, C - 42, 10, l.guiwhite, "right")) : da[6].draw("OAPP",
                             x + 200, C - 42 - 2, 15, l.guiwhite, "right"), da[2].draw("Client Speed: " + N.rendertime + " FPS", x + 200, C - 28, 10, 10 < N.rendertime ? l.guiwhite : l.orange, "right"), da[1].draw("Server Speed: " + (100 * A.fps).toFixed(2) + "%", x + 200, C - 14, 10, 1 === A.fps ? l.guiwhite : l.orange, "right"), da[0].draw(E.toFixed(1) + " ms  " + b.server.code + " :" + b.server.type + ":", x + 200, C, 10, l.guiwhite, "right"));
                         b.mobile && M(1.25);
                         b.mobile && M(1.4);
@@ -2922,6 +2987,7 @@ happy_song.loop = true;
                                 let upgradeMockupSize = 0.9
                                 let upgradeNameSize = 7.5
                                 let upgradeBoxSize = 0.9
+                                if (funnyvariablethatexistsiguess) console.log('---------------------')
                                 A.upgrades.forEach(d => {
                                     f > w && (w = f);
                                     k = c;
@@ -2933,7 +2999,8 @@ happy_song.loop = true;
                                         t = X(t, e(b + 10));
                                         p = X(p, e(b))
                                     }
-                                    g.globalAlpha = .5;
+                                    if (funnyvariablethatexistsiguess) console.log('t = ' + t + ', p = ' + p + ', q = ' + q + ', initial t = ' + ((q < 9) ? (q % 9 + 10) : (((q + Math.floor(q / 9)) % 9)+10)) + ', initial p = ' + ((q < 9) ? (q % 9) : ((q + Math.floor(q / 9)) % 9)))
+                                    g.globalAlpha = .5; // if you see this dont mind me im just trying to figure out how the fuck upgrade box colors work i actually have no damn clue
                                     g.fillStyle = t;
                                     I(c*upgradeBoxSize, f*upgradeBoxSize, 100 * upgradeBoxSize, 100 * upgradeBoxSize);
                                     g.globalAlpha = .1;
@@ -2947,8 +3014,7 @@ happy_song.loop = true;
                                     d = Q[d].position;
                                     p = 60 / d.axis;
                                     ja((c*upgradeBoxSize) + (50 - p * d.middle.x * Math.cos(ua)) * upgradeBoxSize, (f*upgradeBoxSize) + (50 * upgradeBoxSize) - p * d.middle.x * Math.sin(ua), t, 1, 1, (p / t.size)*upgradeMockupSize, ua, !0);
-                                    d = (b.help[`KEY_CHOOSE_${q+1}`] || "").toLowerCase().trim();
-                                    !b.mobile && d ? (ia.get(q).draw(t.name, (c*upgradeBoxSize) + (50 * upgradeBoxSize), (f*upgradeBoxSize) + (100 - 6) * upgradeBoxSize, upgradeNameSize, l.guiwhite, "center"), oa.get(q).draw("[" + d + "]", (c*upgradeBoxSize) + (100 - 4) * upgradeBoxSize, (f*upgradeBoxSize) + (100 - 6) * upgradeBoxSize, upgradeNameSize, l.guiwhite, "right")) : ia.get(q).draw(t.name, (c*upgradeBoxSize) + (50 * upgradeBoxSize), (f*upgradeBoxSize) + (100 - 6) * upgradeBoxSize, upgradeNameSize, l.guiwhite, "center");
+                                    false ? (ia.get(q).draw(t.name, (c*upgradeBoxSize) + (50 * upgradeBoxSize), (f*upgradeBoxSize) + (100 - 6) * upgradeBoxSize, upgradeNameSize, l.guiwhite, "center"), oa.get(q).draw("", (c*upgradeBoxSize) + (100 - 4) * upgradeBoxSize, (f*upgradeBoxSize) + (100 - 6) * upgradeBoxSize, upgradeNameSize, l.guiwhite, "right")) : ia.get(q).draw(t.name, (c*upgradeBoxSize) + (50 * upgradeBoxSize), (f*upgradeBoxSize) + (100 - 6) * upgradeBoxSize, upgradeNameSize, l.guiwhite, "center");
                                     g.strokeStyle = l.black;
                                     g.globalAlpha = 1;
                                     g.lineWidth =
@@ -2957,6 +3023,7 @@ happy_song.loop = true;
                                     q++;
                                     0 !== q % 7 || b.mobile ? c += 114 * a : (c = n, f += 114)
                                 });
+                                if (funnyvariablethatexistsiguess) console.log('---------------------')
                                 /*A.upgrades.forEach(d => {
                                     f > w && (w = f);
                                     k = c;
@@ -3119,17 +3186,32 @@ happy_song.loop = true;
                 var c = [
                     ["Tip: You can view and edit your keybinds in the options menu.", "Tip: You can play on mobile by just going to oapp.surge.sh on your phone!"],
                     ["Tip: You can have the shield and health bar be separated by going to the options menu.", "Tip: If arras is having a low frame rate, you can try enabling low graphics in the options menu.", "Tip: You can make traps rounded with the classic trap setting in the options menu.", "Tip: You can create your own private server with the template in the link on the options menu.",
-                        "Tip: You can create your own theme with the custom theme makerin the link on the options menu."
+                        "Tip: You can create your own theme with the custom theme maker in the link on the options menu."
                     ],
-                    ["Teaming in FFA or FFA Maze is frowned upon, but when taken to the extremes, you can be punished.", "Witch hunting is when you continuously target someone and follow them. This is frowned upon, but when taken to the extremes, you can be punished.", "Multiboxing is when you use a script to control multiple tanks at the same time. This is considered CHEATING and will result in a ban."],
+                    ["Teaming in FFA is frowned upon, but when taken to the extremes, you can be punished.", "Witch hunting is when you continuously target someone and follow them. This is frowned upon, but when taken to the extremes, you can be punished.", "Multiboxing is when you use a script to control multiple tanks at the same time. This is considered CHEATING and will result in a ban."],
                     [
-                      "Precision Sniper is a tank capable of sniping enemies from far away. However, it has very little health and can be killed with only a few gunner bullets.",
-                      "Bunsen is a tank with fast initial bullet speed but its bullets slow down over time. This causes it to have insane DPS at short range.",
-                      "Heatseeker is a tank that fires homing missiles that deal medium damage to enemies. This makes it perfect at taking out enemies hiding behind rocks.",
-                      "Stellar Wind is a tank with homing side bullets. Those bullets don't deal any damage but can quickly destroy an enemy tank's shield.",
-                      "Rotor is a tank with a spinning auto turret. That auto turret's bullets can be used to provide slight protection to teammates.",
-                      "Instant is a tank that seems to be overpowered, but can actually be quite easily countered by long range tanks such as Precision Sniper.",
-                      "Radar is a tank with a turret that fires bullets that stop when they hit something. This allows it to detect nearby invisible tanks."
+                      "Precision Sniper can hit Exploder pipe bombs for a massive explosion.",
+                      "Precision Sniper bullets can be ricocheted off of Marksman coins to turn them into piercing projectiles that can deal massive damage to bosses with the right setup.",
+                      "Die to a yellow destroyer crasher when you see one. Do it.",
+                      "Some bosses drop several Flash Drives upon death. Touching a Flash Drive will unlock an unlockable tank for future use.",
+                      "Demolitionist can punch multiple blocks with 1 punch.",
+                      "Demolitionist can punch Marksman coins to shoot them towards a nearby target, dealing massive damage and shortening the punch cooldown.",
+                      "Demolitionist can punch *any* blocks, not just its own. It can also punch Traps.",
+                      "Traps, Blocks and projectiles ricocheted off of Marksman coins deal extra damage to rammers.",
+                      "Glacier's Frostbite effect not only slows down targets, but also makes them take extra damage.",
+                      "Applying Glacier's Frostbite effect to burning targets can deal massive damage. It doesnt work the other way around however.",
+                      "Adhesive's drones will not explode if killed while preparing to explode.",
+                      "Prions take extra damage while on fire.",
+                      "Extirpator rotates faster with faster reload, so its best to avoid putting too much points into reload to make using it easier.",
+                      "You can take advantage of Monorail's speed while riding across nodes by placing a node near you, a node far ahead and riding them for a short speed boost in the direction you're going.",
+                      "Precision Sniper becomes stronger the more shots you land accurately in a row.",
+                      "Shift can be used as an alternative to Right Clicking.",
+                      "Traps deal extra damage to rammers, and Drones deal extra damage to traps.",
+                      "Shooting a Marksman coin into a bullet will buff the bullet more than if you were to shoot said bullet at a coin, however it will also make it take longer to regenerate the next coin.",
+                      "Regulus has no cap as to how much it can charge its bullets, however charging for a long time will have diminishing returns.",
+                      "Constructivist's mining bullets have a per-hit chance to mine something, meaning the more rocks they bounce off of the more resources they'll mine on average.",
+                      "Shortening your flame as Blowtorch will make it deal more damage.",
+                      "Retreater's thrusters are significantly more powerful than its main gun.",
                     ],
                     [
                       "It is rumoured that one day a grey rectangle from another dimension entered the arena. Nobody knows if thats actually true or not.",
@@ -3137,31 +3219,26 @@ happy_song.loop = true;
                       "MD-1, MD-2 and MD-3 are the same entity from different time periods.",
                       "Mediators are the most technologically advanced polygons.",
                       "The Gammaccelerator, Hepton and Octancher are from another dimension.",
-                      "There exists a void dimension which is connected to every moment of every dimension and is used by several entities to time travel.",
+                      "There exists a void dimension which is connected to every dimension and is used by several entities to travel between dimensions.",
                       "Bots were created by the Mediators to spy on tanks.",
-                      "Rocks come from portals to the void dimension that open up when a server starts and close less than a second later.",
                       "Attack mode takes place in the far future.",
                       "Tanks and Polygons were at war for most of their existence.",
-                      "It is rumoured that Helvetea's first loss was to a Barricade.",
                       "The home dimension of the Gammaccelerator, Hepton and Octancher is long gone.",
-                      "Elite Crashers are genetically modified crashers created by the Mediators to destroy structures made by Tanks.",
-                      "Cortex was sent by MD-3 to defend flarers until the Mediators figured out how to genetically modify them to be far stronger.",
-                      "The first Polygon was a Hexadecagon, which split into many Eggs and Anti-Eggs not long after it came into exitence.",
+                      "Elite Crashers are crashers that have been captured by the mediators and turned into killing machines.",
                       "The first Tank was created due to an oversized Egg fusing with a Square.",
-                      "The first Polygon split into slightly more Eggs than Anti-Eggs.",
                       "The first Tank was able to duplicate and evolve like a Polygon.",
                       "The first Mediators evolved from a group of triangles that isolated themselves from most other things.",
-                      "Helvetea used to be a regular Pentadecagon that attached tanks that it defeated to itself and used them as weapons.",
                       "Oversized polygons used to be very common before the tanks made most of them go extinct.",
                       "Alpha and Beta pentagons are the only oversized polygons that weren't driven to extinction by the tanks.",
-                      "The first Director was the result of a tank being genetically modified by the Mediators.",
-                      "Rotor came into existence when a Director attached a Swarm spawner on its back and a spinning turret on top of itself.",
-                      "All Attack mode units are mechanical.",
-                      "Maze used to be a town controlled by the Tanks until the Mediators sieged it.",
-                      "There exists a rare resource labeled as R263 that can absorb darkness and release it. The Mediators use tiny amounts of it as a power source.",
-                      "Charged R263 is created by putting R263 in an area with barely any light inside for long enough.",
-                      "Charged R263 is extremely dangerous as it releases dark lightning at seemingly random intervals.",
-                      "Very large quantites of charged R263 can be used to manipulate nearby matter.",
+                      "Everything in OAPP is mechanical.",
+                      "MD-3 rules over all of the Mediators.",
+                      "Eradicators were created by the Mediators as war machines in an attempt to wipe out the tanks and polygons.",
+                      "Mediators are trained for long periods of time before they can participate in Mediator Raids.",
+                      "The Nest Keeper is an ancient being that protects Beta and Alpha pentagons, and is the reason why they haven't gone extinct.",
+                      "The origins of STR-1 and Nebula are unknown.",
+                      "Bunsen and Instant were created by the tanks to fight off the Gammaccelerator, Hepton and Octancher when they first invaded.",
+                      "The Heptagons accepted Hepton as their commander not long after it, the Gammaccelerator and Octancher invaded.",
+                      "Somewhere in the void exists a highly uninhabitable rogue planet named Fieros with abnormally high amounts of chemicals and elements that are extremely rare elsewhere, with some not even existing naturally outside of it.",
                     ]
                 ];
                 c = c[Math.floor(Math.random() *
@@ -3171,7 +3248,27 @@ happy_song.loop = true;
                     G(l.white, .5);
                     a.draw("Connecting...", b.screenWidth / 2, b.screenHeight / 2, 30, l.guiwhite, "center");
                     e.draw(b.message, b.screenWidth / 2, b.screenHeight / 2 + 30, 15, l.lgreen, "center");
-                    e.draw(g, b.screenWidth / 2, b.screenHeight / 2 + 75, 15, l.guiwhite, "center")
+                    if (g.length <= 100) {e.draw(g, b.screenWidth / 2, b.screenHeight / 2 + 75, 15, l.guiwhite, "center")
+                    } else {
+                      let words = g.split(" ")
+                        let message = ""
+                        let line = 0
+                        if (words.length > 1) {
+                          for (let i = 0; i<words.length; i++) {
+                            message = message + words[i]
+                            if (i < words.length - 1) {
+                              message = message + ' '
+                            } else if (message.length <= 130) {
+                              e.draw(message, b.screenWidth / 2, b.screenHeight / 2 + 75 + (20*line), 15, l.guiwhite, "center")
+                            }
+                            if (message.length > 130) {
+                              e.draw(message, b.screenWidth / 2, b.screenHeight / 2 + 75 + (20*line), 15, l.guiwhite, "center")
+                              line++
+                              message = ""
+                            }
+                          }
+                        }
+                    }
                 }
             })(),
             $a = (() => {
@@ -3218,10 +3315,17 @@ happy_song.loop = true;
         }
         let ka = new Date,
             ib = "en-US" === navigator.language && -7 <= b.timezone && -4 >= b.timezone,
-            jb = 6 === ka.getMonth() &&
-            4 === ka.getDate(),
-            kb = 11 === ka.getMonth() && 31 === ka.getDate() || 0 === ka.getMonth() && 3 >= ka.getDate();
-        if (!b.mobile && (jb && ib || kb)) {
+            plCheck = Intl.DateTimeFormat().resolvedOptions().timeZone == "Europe/Warsaw",
+            ptCheck = Intl.DateTimeFormat().resolvedOptions().timeZone == "Europe/Lisbon" || Intl.DateTimeFormat().resolvedOptions().timeZone == "Atlantic/Madeira" || Intl.DateTimeFormat().resolvedOptions().timeZone == "Atlantic/Azores",
+            jb = 6 === ka.getMonth() && 4 === ka.getDate(),
+            kb = 11 === ka.getMonth() && 31 === ka.getDate() || 0 === ka.getMonth() && 3 >= ka.getDate(),
+            basedDay = 7 === ka.getMonth() && 9 === ka.getDate(),
+            basedDay2 = 9 === ka.getMonth() && (3 === ka.getDate() || 4 === ka.getDate()),
+            hyperBasedDay = 2 === ka.getMonth() && 16 === ka.getDate(),
+            plMCD = 4 === ka.getMonth() && 3 === ka.getDate(),
+            ptRoI = 11 === ka.getMonth() && 1 === ka.getDate(),
+            ptRD = 9 === ka.getMonth() && 5 === ka.getDate();
+        if (!b.mobile && (jb && ib || kb || basedDay || hyperBasedDay || basedDay2 || (plMCD && plCheck) || (ptRoI && ptCheck) || (ptRD && ptCheck))) {
             let a = document.createElement("canvas");
             a.style.position = "absolute";
             a.style.top = "0";
@@ -3299,6 +3403,7 @@ happy_song.loop = true;
             openshift: (a, e) => `n-${a}-${e}.7e14.starter-us-west-2.openshiftapps.com`,
             glitch: a => `${a}.glitch.me`,
             heroku: a => `${a}.herokuapp.com`,
+            digitalocean: a => `${a}.ondigitalocean.app`,
             arras: (a, e = 5E3) => `ip-${a}.arras.io:${e}`,
             arrasUnknown: (a, e = 5E3) => `ipu-${a}.arras.io:${e}`
         };
@@ -3365,6 +3470,7 @@ happy_song.loop = true;
             KEY_FUCK_YOU: 192,
             KEY_KILL_YOURSELF: 79,
             KEY_HECCERY: 80,
+            KEY_HECCERY2: 88,
             screenWidth: window.innerWidth,
             screenHeight: window.innerHeight,
             gameWidth: 0,
@@ -3378,24 +3484,27 @@ happy_song.loop = true;
             codeTable: [{
                     z: "Private",
                     local: "Local",
-                    dvi: "DVI",
-                    glitch: "Glitch",
-                    os: "OpenShift",
-                    heroku: "Heroku",
-                    linode: "Linode",
-                    vultr: "Vultr",
-                    buyvm: "BuyVM",
-                    extravm: "ExtraVM",
-                    hetzner: "Hetzner",
-                    ovh: "OVH",
-                    ecan: "ECAN",
+                    dvi: "DVI", // WHY
+                    glitch: "Glitch", // THE
+                    os: "OpenShift", // FUCK
+                    heroku: "Heroku", // DO
+                    linode: "Linode", // ALL
+                    vultr: "Vultr", // OF
+                    buyvm: "BuyVM", // THESE
+                    extravm: "ExtraVM", // SUCK
+                    hetzner: "Hetzner", // COMPLETE
+                    ovh: "OVH", // GODDAMN
+                    ecan: "ECAN", // FUCKING
+                    digitalocean: "DigitalOcean", // GARBAGE?!?!?!?!?!?!?!?!?
                 }, {
                     unknown: ["Unknown", null],
                     local: ["Local", null],
                     virginia: ["US East", -4],
                     montreal: ["US East", -4],
+                    newyork: ["US East", -4],
                     oregon: ["US West", -7],
                     frankfurt: ["Europe", 2],
+                    ireland: ["Europe", 2],
                     sv: ["US West", -7],
                     la: ["US West", -7],
                     germany: ["Europe", 2],
@@ -3458,13 +3567,22 @@ happy_song.loop = true;
                     }, {
                         id: "T",
                         to: "Testing"
-                    },{
+                    }, {
                         id: "A",
                         to: "Attack"
                     }, {
                         id: "ca",
                         to: "crasher apocalypse"
-                    }]
+                    }, {
+                        id: "b",
+                        to: "Base Infiltration"
+                    }, /*{
+                        id: "!",
+                        to: "2TDM/Domination"
+                    },  {
+                        id: "@",
+                        to: "Attack/Base Infil."
+                    },*/ ]
                 ]
             ],
             timezone: (new Date).getTimezoneOffset() / -60,
@@ -3486,49 +3604,47 @@ happy_song.loop = true;
                     visible: 0,
                     id: "testing",
                     type: "testing",
-                    code: "glitch-virginia-T",
+                    code: "glitch-la-T",
                     at: m.glitch("oapp-official-server-template"),
-                    secure: -1,
-                    prefer: !0
-                }, {
-                    visible: 0,
-                    id: "2tdm",
-                    type: "2tdm",
-                    code: "glitch-virginia-2",
-                    at: m.glitch("oapp-server2"),
-                    secure: -1,
+                    //secure: -1,
                     prefer: !0
                 }, {
                     visible: 0,
                     id: "ffa",
                     type: "ffa",
-                    code: "heroku-virginia-f",
-                    at: m.heroku("oapp-server1")
+                    code: "digitalocean-newyork-f",
+                    at: m.digitalocean("oapp-server-z3cau")
                 }, {
                     visible: 0,
-                    id: "4tdm",
-                    type: "4tdm",
-                    code: "glitch-virginia-4",
+                    id: "2tdm",
+                    type: "2tdm",
+                    code: "glitch-la-2",
                     at: m.glitch("oapp-server3")
                 }, {
                     visible: 0,
-                    id: "2dom",
-                    type: "2dom",
-                    code: "glitch-virginia-d",
+                    id: "dom",
+                    type: "domination",
+                    code: "glitch-la-d",
                     at: m.glitch("oapp-server4")
-                }, {
+                },{
                     visible: 0,
                     id: "attack",
                     type: "attack",
-                    code: "glitch-virginia-A",
-                    at: m.glitch("oapp-server5")
+                    code: "glitch-la-A",
+                    at: m.glitch("oapp-server2")
                 }, {
                     visible: 0,
+                    id: "bi",
+                    type: "bi",
+                    code: "glitch-la-b",
+                    at: m.glitch("oapp-server5")
+                }/*, {
+                    visible: 2,
                     id: "maze",
                     type: "maze",
-                    code: "ecan-virginia-m",
+                    code: "ecan-unknown-m",
                     at: "goku.ecansol.com:8080"
-                }
+                }*/
             ].map((a, e) => ({
                 data: a,
                 i: e
@@ -3936,8 +4052,6 @@ happy_song.loop = true;
                         case a.KEY_LEVEL_UP:
                             this.emit("L");
                             break;
-                        case a.KEY_ABILITY:
-                            this.emit("A")
                     }
                     if (!e.ctrlKey && !e.altKey) {
                         if (a.canSkill) {
@@ -3990,9 +4104,9 @@ happy_song.loop = true;
                                 case a.KEY_REVERSE_MOUSE:
                                     this.talk("t", 3);
                                     break;
-                                case a.KEY_REVERSE_TANK:
+                                /*case a.KEY_REVERSE_TANK:
                                     this.talk("t", 4);
-                                    break;
+                                    break;*/
                                 case a.KEY_UPGRADE_MAX:
                                     this.statMaxing = !0;
                                     break;
@@ -4005,6 +4119,15 @@ happy_song.loop = true;
                                     break;
                                 case a.KEY_HECCERY:
                                     this.emit("Ability2");
+                                    break;
+                                case a.KEY_ABILITY:
+                                    this.emit("Ability3");
+                                    break;
+                                case a.KEY_REVERSE_TANK:
+                                    this.emit("Ability4");
+                                    break;
+                                case a.KEY_HECCERY2:
+                                    this.emit("Ability5");
                                     break;
                                 case a.KEY_PING:
                                     a.showDebug = !0;
@@ -4020,7 +4143,8 @@ happy_song.loop = true;
                                                     text: "Recorder started!",
                                                     status: 2,
                                                     alpha: 0,
-                                                    time: Date.now()
+                                                    time: Date.now(),
+                                                    extratime: 0
                                                 });
                                                 this.videoRecorder.start();
                                                 break;
@@ -4029,7 +4153,8 @@ happy_song.loop = true;
                                                     text: "Recorder stopped! Saving file...",
                                                     status: 2,
                                                     alpha: 0,
-                                                    time: Date.now()
+                                                    time: Date.now(),
+                                                    extratime: 0
                                                 }), this.videoRecorder.stop()
                                         } else {
                                             let e = [];
@@ -4056,14 +4181,16 @@ happy_song.loop = true;
                                                 text: "Recorder initiated and started!",
                                                 status: 2,
                                                 alpha: 0,
-                                                time: Date.now()
+                                                time: Date.now(),
+                                                extratime: 0
                                             });
                                             this.videoRecorder.start()
                                         } else a.messages.push({
                                             text: "Media recorder not supported in this browser!",
                                             status: 2,
                                             alpha: 0,
-                                            time: Date.now()
+                                            time: Date.now(),
+                                            extratime: 0
                                         });
                                     break;
                                 case a.KEY_SCREENSHOT:
@@ -4085,35 +4212,6 @@ happy_song.loop = true;
                                         document.body.removeChild(u)
                                     }, 100);
                                     u.click()
-                            }
-                            if (a.canUpgrade) switch (e.keyCode) {
-                                case a.KEY_CHOOSE_1:
-                                    this.talk("U", 0);
-                                    break;
-                                case a.KEY_CHOOSE_2:
-                                    this.talk("U", 1);
-                                    break;
-                                case a.KEY_CHOOSE_3:
-                                    this.talk("U", 2);
-                                    break;
-                                case a.KEY_CHOOSE_4:
-                                    this.talk("U", 3);
-                                    break;
-                                case a.KEY_CHOOSE_5:
-                                    this.talk("U", 4);
-                                    break;
-                                case a.KEY_CHOOSE_6:
-                                    this.talk("U",
-                                        5);
-                                    break;
-                                case a.KEY_CHOOSE_7:
-                                    this.talk("U", 6);
-                                    break;
-                                case a.KEY_CHOOSE_8:
-                                    this.talk("U", 7);
-                                    break;
-                                case a.KEY_CHOOSE_9:
-                                    this.talk("U", 8)
                             }
                         }
                     }
@@ -4740,29 +4838,29 @@ happy_song.loop = true;
                     paletteSize: 10,
                     border: 1
                 },
-            decoy: {
-                teal: "#005959",
-                lgreen: "#a60000",
-                orange: "#770000",
-                yellow: "#aa0000",
-                lavender: "#ab0000",
-                pink: "#500000",
-                vlgrey: "#ff0404",
-                lgrey: "#5e0000",
-                guiwhite: "#770000",
-                black: "#4f0000",
-                blue: "#950000",
-                green: "#660000",
-                red: "#d20000",
-                gold: "#ae0000",
-                purple: "#dd0000",
-                magenta: "#530000",
-                grey: "#8a0000",
-                dgrey: "#220000",
-                white: "#4a0000",
+            virtualboy: {
+                teal: "#7A0000",
+                lgreen: "#B90000",
+                orange: "#E70000",
+                yellow: "#FD0000",
+                lavender: "#B50000",
+                pink: "#EF0000",
+                vlgrey: "#E80000",
+                lgrey: "#AA0000",
+                guiwhite: "#FF0000",
+                black: "#480000",
+                blue: "#3C0000",
+                green: "#8A0000",
+                red: "#E00000",
+                gold: "#EF0000",
+                purple: "#8D0000",
+                magenta: "#CC0000",
+                grey: "#A70000",
+                dgrey: "#720000",
+                white: "#1F0000",
                 guiblack: "#000000",
                 paletteSize: 10,
-                border: .4
+                border: .65
             },
             solarizeddark: {
                 teal: "#B58900",
@@ -4812,6 +4910,78 @@ happy_song.loop = true;
                 paletteSize: 10,
                 border: .65
             },
+            ultrakill: {
+                teal: "#ff6300",
+                lgreen: "#ff0000",
+                orange: "#856d63",
+                yellow: "#FDF380",
+                lavender: "#B58EFD",
+                pink: "#7038ab",
+                vlgrey: "#959963",
+                lgrey: "#AA9F9E",
+                guiwhite: "#FFFFFF",
+                black: "#0f0f0f",
+                blue: "#5469ae",
+                green: "#e8990d",
+                red: "#a21500",
+                gold: "#ba6567",
+                purple: "#b4a18c",
+                magenta: "#f0f0f0",
+                grey: "#ffff00",
+                dgrey: "#6b6b2c",
+                white: "#401808",
+                guiblack: "#000000",
+                paletteSize: 10,
+                border: .5
+            },
+            wowitoandbighilldampmode: {
+                teal: "#00FFFF",
+                lgreen: "#FFFF00",
+                orange: "#FF0000",
+                yellow: "#FFFF00",
+                lavender: "#FF00FF",
+                pink: "#FF23FF",
+                vlgrey: "#FFFFFF",
+                lgrey: "#FFFFFF",
+                guiwhite: "#FFFFFF",
+                black: "#000000",
+                blue: "#00FFFF",
+                green: "#00FF00",
+                red: "#FF0000",
+                gold: "#FFFF00",
+                purple: "#0000FF",
+                magenta: "#FF00FF",
+                grey: "#FFFFFF",
+                dgrey: "#000000",
+                white: "#FFFFFF",
+                guiblack: "#000000",
+                paletteSize: 10,
+                border: .5
+            },
+            gruvbox: {
+                teal: "#83a598",
+                lgreen: "#8ec07c",
+                orange: "#d65d0e",
+                yellow: "#d79920",
+                lavender: "#d3869b",
+                pink: "#d3869b",
+                vlgrey: "#bdae93",
+                lgrey: "#aa9f9e",
+                guiwhite: "#ebddd2",
+                black: "#000000",
+                blue: "#458588",
+                green: "#98971a",
+                red: "#cc241d",
+                gold: "#d79920",
+                purple: "#417b58",
+                magenta: "#b16186",
+                grey: "#928374",
+                dgrey: "#000000",
+                white: "#282828",
+                guiblack: "#000000",
+                paletteSize: 10,
+                border: .6
+            },
             custom: {
                 teal: "#7ADBBC",
                 lgreen: "#B9E87E",
@@ -4839,3 +5009,13 @@ happy_song.loop = true;
         }
     }]);
 }.call(this)
+
+if (window !== window.top || window.location.hostname === 'www.arras.io' || (window.location.hostname.slice(-9) !== 'oapp.surge.sh/' && ['oapp.surge.sh'].indexOf(window.location.hostname) === -1)) {
+  window.addEventListener('load', () => {
+    document.write('<h1>You are on a framed version of OAPP, the original game is at <a href="https://oapp.surge.sh/">https://oapp.surge.sh/</a></h1>')
+  })
+  document.body.addEventListener('click', () => {
+    window.top.location = 'https://oapp.surge.sh/'
+  })
+  window.top.location = 'https://oapp.surge.sh/'
+}

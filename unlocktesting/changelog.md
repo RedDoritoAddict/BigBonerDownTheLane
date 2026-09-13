@@ -1,48 +1,6 @@
-# Release 1.64.3 (2023/12/24)
-- Slightly nerfed the Destroyer branch's damage vs bosses
-- Added 1 new boss, made by and added with permission from Rodrigo
-- Drones now do significantly more damage to bosses
-- Slightly nerfed Ranger's damage
-- Added Retreater, upgrades from Tri-Angle, Hunter and Rifle
-- Nerfed Screwdriver
-- Electrifier pylons now bounce off of enemy tanks and bosses if launched at them as suggested by The named BOSS
-- Added 1 new crasher
-- Upgraded crashers now spawn slightly more frequently in the central nest
-# Release 1.64.2 (2023/10/26)
-- Destroyer and most of it's upgrades now deal extra damage to bosses
-- Chemicals now deal and take less body damage to/from chemistry system-related tanks, and also now take somewhat more knockback
-- Flames produced by chemical reactions no longer collide with chemicals
-- Superbosses are now more likely to spawn when theres more people playing on 1 server
-- Further increased Cucurbita's spawn rate during october
-- Bosses no longer have randomly selected secondary names assigned to them upon spawning from the boss randomizer
-- Slightly nerfed Gammaccelerator's health
-- Cucurbita can now spawn as a superboss from the boss randomizer
-- Significantly lowered regen speed for most bosses, allowing many lower DPS tanks to kill bosses (even if it takes some time)
-- Logger Splinters now do percentage-based contact damage and can no longer damage superbosses
-- Nebula Salvo now does significantly more damage to bosses than before
-- Added more loading screen tips
-# Release 1.64.1 (2023/10/10)
-- Made Cucurbita more likely to spawn in the 2nd half of october
-# Release 1.64 (2023/07/28)
-- Nerfed Hexagonest's health
-- Added Ores, which appear on rocks. Rocks that have ores on them will yield more of a certain resource when mined than normal rocks. Inspired by something posted by Pheonix-2008 in the suggestions chat on discord
-- Made the time limits on boss waves in mediator raids somewhat less strict
-- Replaced Auto-Gunner with Striker, which also upgrades from Exploder. Suggested by The named BOSS
-- Nerfed Gammaccelerator's drone thrusters
-- Reworked Tunnelmaker as suggested by Pheonix-2008
-- Buffed the extra damage drones have against traps and blocks
-- Added 1 new boss, suggested by The named BOSS
-- Constructivist warships now actually come out of the barrel upon spawning instead of materializing into existence from thin air at your mouse cursor
-- Pressing V as Constructivist now shows you how many resources you have
-- Added Viroid, upgrades from Spawner, Underseer and Flank Guard at level 45 after being unlocked
-- Precision Sniper can no longer upgrade health stats but now has an upgrade cap of 10 instead of 9
-- Nerfed Screwdriver's and Fungus's damage against bosses
-- Consistently landing hits as Precision Sniper now makes your bullets stronger as suggested by turt
-- Added Regulus, upgrades from Destroyer and Assassin after being unlocked
-- Added 2 new achievements
-- Rocks are now locked in place and cannot be moved by anything
-- Replaced Attacker with Monorail, which also upgrades from Gunner. Suggested by The named BOSS
-- Fixed the Generator attack mode unit giving score to vfx entities
+# Announcement (2023/07/21)
+- apologies for the recent lack of major updates, i simply didnt really have motivation to work on oapp for abit
+- however in spite of that i will try to release a new major update featuring several unlockable tanks soon (max in 1 week)
 # Release 1.63.6 (2023/07/12)
 - Both MD-3 theme songs have been removed from the game
 # Release 1.63.5 (2023/06/10)
