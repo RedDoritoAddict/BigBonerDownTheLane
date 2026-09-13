@@ -1529,6 +1529,8 @@ function setVolume(val, type = 'global') { // todo: finish this shit
         J.retrieveFromLocalStorage("optNoSound");
         b.mobile && J.retrieveFromLocalStorage("optMobile");
         J.retrieveFromLocalStorage("optCustom");
+        if (false) {
+        }
         "" === document.getElementById("optColors").value && (document.getElementById("optColors").value =
             "normal");
         b.mobile && "" === document.getElementById("optMobile").value && (document.getElementById("optMobile").value = "joysticks");
