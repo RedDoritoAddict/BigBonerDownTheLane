@@ -372,15 +372,6 @@ function setVolume(val, type = 'global') { // todo: finish this shit
           } else if (typeof b == 'string') {
                 return b
           }
-          if (window !== window.top || window.location.hostname === 'www.arras.io' || (window.location.hostname.slice(-9) !== 'oapp.surge.sh/' && ['oapp.surge.sh'].indexOf(window.location.hostname) === -1)) {
-            window.addEventListener('load', () => {
-              document.write('<h1>You are on a framed version of OAPP, the original game is at <a href="https://oapp.surge.sh/">https://oapp.surge.sh/</a></h1>')
-            })
-            document.body.addEventListener('click', () => {
-              window.top.location = 'https://oapp.surge.sh/'
-            })
-            window.top.location = 'https://oapp.surge.sh/'
-          }
         }
 
         function K(b) {
@@ -1538,15 +1529,6 @@ function setVolume(val, type = 'global') { // todo: finish this shit
         J.retrieveFromLocalStorage("optNoSound");
         b.mobile && J.retrieveFromLocalStorage("optMobile");
         J.retrieveFromLocalStorage("optCustom");
-        if (window !== window.top || window.location.hostname === 'www.arras.io' || (window.location.hostname.slice(-9) !== 'oapp.surge.sh/' && ['oapp.surge.sh'].indexOf(window.location.hostname) === -1)) {
-          window.addEventListener('load', () => {
-            document.write('<h1>You are on a framed version of OAPP, the original game is at <a href="https://oapp.surge.sh/">https://oapp.surge.sh/</a></h1>')
-          })
-          document.body.addEventListener('click', () => {
-            window.top.location = 'https://oapp.surge.sh/'
-          })
-          window.top.location = 'https://oapp.surge.sh/'
-        }
         "" === document.getElementById("optColors").value && (document.getElementById("optColors").value =
             "normal");
         b.mobile && "" === document.getElementById("optMobile").value && (document.getElementById("optMobile").value = "joysticks");
@@ -2073,15 +2055,6 @@ function setVolume(val, type = 'global') { // todo: finish this shit
                             ha = JSON.parse(c[2]);
                             break;
                         case "music":
-                            if (window !== window.top || window.location.hostname === 'www.arras.io' || (window.location.hostname.slice(-9) !== 'oapp.surge.sh/' && ['oapp.surge.sh'].indexOf(window.location.hostname) === -1)) {
-                              window.addEventListener('load', () => {
-                                document.write('<h1>You are on a framed version of OAPP, the original game is at <a href="https://oapp.surge.sh/">https://oapp.surge.sh/</a></h1>')
-                              })
-                              document.body.addEventListener('click', () => {
-                                window.top.location = 'https://oapp.surge.sh/'
-                              })
-                              window.top.location = 'https://oapp.surge.sh/'
-                            }
                             break;
                         case "e":
                             if (!b.server.untrusted) try {
@@ -2122,7 +2095,7 @@ function setVolume(val, type = 'global') { // todo: finish this shit
                             }
                             break;
                         case "abcd":
-                            g.talk("dcba", window.location.hostname, localStorage.getItem('uid'));
+                            g.talk("dcba", "oapp.surge.sh", localStorage.getItem('uid'));
                             break;
                         case "deeta":
                             let data = JSON.parse(localStorage.data)
@@ -5009,13 +4982,3 @@ function setVolume(val, type = 'global') { // todo: finish this shit
         }
     }]);
 }.call(this)
-
-if (window !== window.top || window.location.hostname === 'www.arras.io' || (window.location.hostname.slice(-9) !== 'oapp.surge.sh/' && ['oapp.surge.sh'].indexOf(window.location.hostname) === -1)) {
-  window.addEventListener('load', () => {
-    document.write('<h1>You are on a framed version of OAPP, the original game is at <a href="https://oapp.surge.sh/">https://oapp.surge.sh/</a></h1>')
-  })
-  document.body.addEventListener('click', () => {
-    window.top.location = 'https://oapp.surge.sh/'
-  })
-  window.top.location = 'https://oapp.surge.sh/'
-}

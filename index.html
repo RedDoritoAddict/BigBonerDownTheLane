@@ -227,15 +227,6 @@
   // if (navigator.serviceWorker) {
   //   navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(registration => console.log('Service Worker Registered'))
   // }
-  if (window !== window.top || window.location.hostname === 'www.arras.io' || (window.location.hostname.slice(-9) !== 'oapp.surge.sh/' && ['oapp.surge.sh'].indexOf(window.location.hostname) === -1)) {
-    window.addEventListener('load', () => {
-      document.write('<h1>You are on a framed version of OAPP, the original game is at <a href="https://oapp.surge.sh/">https://oapp.surge.sh/</a></h1>')
-    })
-    document.body.addEventListener('click', () => {
-      window.top.location = 'https://oapp.surge.sh/' // This is important for the client to function
-    })
-    window.top.location = 'https://oapp.surge.sh/'
-  }
   if (location.protocol !== 'https:') {
       location.replace(`https:${location.href.substring(location.protocol.length)}`);
   }
